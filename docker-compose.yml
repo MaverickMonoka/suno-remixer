@@ -1,0 +1,13 @@
+services:
+  fusionvoice-api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8080
+      # Point this at the authorised voice-conversion executable when installed.
+      # - FUSIONVOICE_CONVERTER=/models/convert.sh
+    volumes:
+      - fusionvoice-data:/data
+volumes:
+  fusionvoice-data:
