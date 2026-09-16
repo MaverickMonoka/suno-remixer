@@ -4,7 +4,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py .
+COPY converters ./converters
+COPY start.sh .
+RUN chmod +x /app/start.sh /app/converters/http_converter.py
 ENV PORT=8000 FUSIONVOICE_DATA=/data
 VOLUME ["/data"]
 EXPOSE 8000
-CMD ["sh","-c","uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
+CMD ["/app/start.sh"]
