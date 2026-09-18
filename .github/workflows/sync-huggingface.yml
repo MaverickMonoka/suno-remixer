@@ -10,7 +10,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   publish:
@@ -25,7 +24,7 @@ jobs:
 
       - name: Publish backend to FusionVoice Space
         env:
-          HF_OIDC_RESOURCE: spaces/MaverickMonoka/FusionVoice
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           hf upload MaverickMonoka/FusionVoice ./backend . \
             --repo-type space \
