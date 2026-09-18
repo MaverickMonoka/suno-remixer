@@ -4,8 +4,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY main.py .
-COPY runpod_handler.py .
+COPY converters ./converters
+COPY start.sh .
+RUN chmod +x /app/start.sh /app/converters/http_converter.py
 ENV PORT=8000 FUSIONVOICE_DATA=/data
 VOLUME ["/data"]
 EXPOSE 8000
-CMD ["python","-u","runpod_handler.py"]
+CMD ["/app/start.sh"]
